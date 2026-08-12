@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --locked --offline -- -D warnings
+      - run: cargo test --workspace --locked --offline
+
+  debian-package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            codename: noble
+          - runner: ubuntu-26.04
+            codename: resolute
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cargo cmake debhelper devscripts g++ libfcitx5core-dev libfcitx5-qt6-dev lintian pkg-config qt6-base-dev rustc
+      - name: Set distribution version
+        env:
+          DEBEMAIL: anhcuongdev@gmail.com
+          DEBFULLNAME: VietIME Contributors
+        run: scripts/package-version.sh "${{ matrix.codename }}"
+      - name: Build package offline
+        run: dpkg-buildpackage -b -us -uc
+      - name: Validate package
+        run: |
+          package="$(find .. -maxdepth 1 -name 'fcitx5-vietime_*_amd64.deb' -print -quit)"
+          lintian --fail-on error "$package"
+          scripts/verify-deb.sh "$package"
+      - name: Install and remove package
+        run: |
+          package="$(find .. -maxdepth 1 -name 'fcitx5-vietime_*_amd64.deb' -print -quit)"
+          sudo apt-get install -y "$package"
+          test -f "/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH)/fcitx5/vietime.so"
+          sudo apt-get remove -y fcitx5-vietime

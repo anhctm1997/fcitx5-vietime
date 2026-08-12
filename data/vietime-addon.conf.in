@@ -1,0 +1,7 @@
+[Addon]
+Name=VietIME
+Category=InputMethod
+Version=0.1.23
+Library=vietime
+Type=SharedLibrary
+OnDemand=True

@@ -1,0 +1,17 @@
+/target/
+/build/
+/obj-*/
+/dist/
+/debian/.debhelper/
+/debian/cargo-home/
+/debian/fcitx5-vietime/
+/debian/fcitx5-vietime-dbgsym/
+/debian/debhelper-build-stamp
+/debian/files
+/debian/*.buildinfo
+/debian/*.changes
+/debian/*.debhelper.log
+/debian/*.substvars
+/.pc/
+*.deb
+*.ddeb

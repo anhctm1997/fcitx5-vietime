@@ -1,0 +1,7 @@
+[InputMethod]
+Name=VietIME
+Icon=input-keyboard
+Label=VI
+LangCode=vi
+Addon=vietime
+Configurable=True

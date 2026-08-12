@@ -1,0 +1,26 @@
+Source: fcitx5-vietime
+Section: utils
+Priority: optional
+Maintainer: VietIME Contributors <anhcuongdev@gmail.com>
+Build-Depends:
+ cargo,
+ cmake (>= 3.20),
+ debhelper-compat (= 13),
+ g++,
+ libfcitx5core-dev,
+ libfcitx5-qt6-dev,
+ pkg-config,
+ qt6-base-dev,
+ rustc
+Standards-Version: 4.7.2
+Homepage: https://github.com/anhctm1997/fcitx5-vietime
+Rules-Requires-Root: no
+
+Package: fcitx5-vietime
+Architecture: any
+Depends: fcitx5, ${misc:Depends}, ${shlibs:Depends}
+Recommends: gnome-shell
+Description: Vietnamese Telex input method engine for Fcitx5
+ VietIME is a Vietnamese Telex input method for Fcitx5. Its input engine is
+ written in Rust and commits completed text without using client-side preedit,
+ avoiding composition underlines in supported applications.

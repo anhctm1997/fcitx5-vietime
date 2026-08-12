@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+
+export CARGO_HOME := $(CURDIR)/debian/cargo-home
+export CARGO_NET_OFFLINE := true
+export DEB_BUILD_MAINT_OPTIONS := hardening=+all
+
+%:
+	dh $@ --buildsystem=cmake --sourcedirectory=fcitx
+
+override_dh_auto_configure:
+	cargo build --release --locked --offline -p vietime-ffi
+	dh_auto_configure --sourcedirectory=fcitx -- \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
+		-DVIETIME_RUST_LIBRARY=$(CURDIR)/target/release/libvietime_ffi.a
+
+override_dh_auto_test:
+	cargo test --workspace --release --locked --offline
+	dh_auto_test --sourcedirectory=fcitx
+
+override_dh_auto_clean:
+	dh_auto_clean --sourcedirectory=fcitx
+	cargo clean
+	rm -rf debian/cargo-home
+
+override_dh_clean:
+	dh_clean -Xvendor/

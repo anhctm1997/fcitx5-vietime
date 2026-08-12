@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            codename: noble
+          - runner: ubuntu-26.04
+            codename: resolute
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cargo cmake debhelper devscripts g++ libfcitx5core-dev libfcitx5-qt6-dev lintian pkg-config qt6-base-dev rustc
+      - name: Check, version and build
+        env:
+          DEBEMAIL: anhcuongdev@gmail.com
+          DEBFULLNAME: VietIME Contributors
+        run: |
+          cargo test --workspace --locked --offline
+          scripts/package-version.sh "${{ matrix.codename }}"
+          dpkg-buildpackage -b -us -uc
+      - name: Validate and stage artifact
+        run: |
+          package="$(find .. -maxdepth 1 -name 'fcitx5-vietime_*_amd64.deb' -print -quit)"
+          lintian --fail-on error "$package"
+          scripts/verify-deb.sh "$package"
+          sudo apt-get install -y "$package"
+          test -f "/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH)/fcitx5/vietime.so"
+          sudo apt-get remove -y fcitx5-vietime
+          mkdir -p dist
+          cp "$package" dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb-${{ matrix.codename }}
+          path: dist/*.deb
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: deb-*
+          path: dist
+          merge-multiple: true
+      - name: Create checksums
+        working-directory: dist
+        run: sha256sum *.deb > SHA256SUMS
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.deb
+            dist/SHA256SUMS

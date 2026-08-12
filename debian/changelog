@@ -1,0 +1,172 @@
+fcitx5-vietime (0.1.23-1~resolute1) resolute; urgency=medium
+
+  * Interpret a late w in non-qu ua nuclei as u horn (suawr becomes sửa).
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 23:30:00 +0700
+
+fcitx5-vietime (0.1.22-1~resolute1) resolute; urgency=medium
+
+  * Resolve GNOME focused applications synchronously before processing keys.
+  * Use client or server preedit according to the input context capability.
+  * Fix the runtime diagnostics cache path.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 23:00:00 +0700
+
+fcitx5-vietime (0.1.21-1~resolute1) resolute; urgency=medium
+
+  * Persist application rules independently and apply changes immediately.
+  * Normalize desktop IDs and executable basenames for reliable matching.
+  * Show live focus, matched-rule, and engine-mode diagnostics.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 22:00:00 +0700
+
+fcitx5-vietime (0.1.20-1~resolute1) resolute; urgency=medium
+
+  * Decode the GNOME application list using its exact D-Bus aa{ss} type.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 21:00:00 +0700
+
+fcitx5-vietime (0.1.19-1~resolute1) resolute; urgency=medium
+
+  * Fix Qt configuration plugin metadata so the application modal opens.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 20:30:00 +0700
+
+fcitx5-vietime (0.1.18-1~resolute1) resolute; urgency=medium
+
+  * Fix GNOME focus tracker D-Bus return values for application dictionaries.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 20:00:00 +0700
+
+fcitx5-vietime (0.1.17-1~resolute1) resolute; urgency=medium
+
+  * Add a Qt application-rule editor with open, recent, and manual sources.
+  * Resolve focused application identities through a user-enabled GNOME
+    extension.
+  * Match verified desktop ID, app ID, WM class, and executable aliases.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 19:00:00 +0700
+
+fcitx5-vietime (0.1.16-1~resolute1) resolute; urgency=medium
+
+  * Always use deferred commit for terminal input contexts.
+  * Ignore unreliable terminal surrounding-text capability advertisement.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 17:00:00 +0700
+
+fcitx5-vietime (0.1.15-1~resolute1) resolute; urgency=medium
+
+  * Buffer words internally on terminals without surrounding text.
+  * Remove forwarded-Backspace replacement flicker in those terminals.
+  * Commit the completed word when its boundary key is received.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 16:30:00 +0700
+
+fcitx5-vietime (0.1.14-1~resolute1) resolute; urgency=medium
+
+  * Add a forwarded-Backspace replacement fallback for terminal clients.
+  * Keep direct commit without displaying preedit.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 16:00:00 +0700
+
+fcitx5-vietime (0.1.13-1~resolute1) resolute; urgency=medium
+
+  * Commit characters directly without displaying a preedit.
+  * Let word boundaries pass through so one Space produces one space.
+  * Restrict Telex replacements to clients with valid surrounding text.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 15:30:00 +0700
+
+fcitx5-vietime (0.1.12-1~resolute1) resolute; urgency=medium
+
+  * Move complete preedit ownership into the Rust state machine.
+  * Commit words and boundaries atomically without surrounding-text edits.
+  * Preserve ignored-key and input-method-switch behavior like fcitx5-unikey.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 15:00:00 +0700
+
+fcitx5-vietime (0.1.11-1~resolute1) resolute; urgency=medium
+
+  * Match fcitx5-unikey's unformatted preedit display and raw-key handling.
+  * Verify the Telex dd replacement remains valid UTF-8 across the C ABI.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 14:30:00 +0700
+
+fcitx5-vietime (0.1.10-1~resolute1) resolute; urgency=medium
+
+  * Fix Telex horn completion for ươ and late w input.
+  * Use UniKey-style client/server preedit fallback for terminal compatibility.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 14:00:00 +0700
+
+fcitx5-vietime (0.1.9-1~resolute1) resolute; urgency=medium
+
+  * Use terminal-only client preedit so Bash/readline never depends on VTE
+    surrounding-text deletion or asynchronously forwarded Backspace events.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 13:30:00 +0700
+
+fcitx5-vietime (0.1.8-1~resolute1) resolute; urgency=medium
+
+  * Fix duplicated Vietnamese characters in GNOME Terminal by preferring
+    synchronous surrounding-text deletion over forwarded Backspace events.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 13:00:00 +0700
+
+fcitx5-vietime (0.1.7-1~resolute1) resolute; urgency=medium
+
+  * Keep the rendered ASCII word after a repeated Telex tone cancels a mark.
+  * Prevent cancelling keys from leaking during Free Typing word restoration.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 12:30:00 +0700
+
+fcitx5-vietime (0.1.6-1~resolute1) resolute; urgency=medium
+
+  * Prefer synchronous surrounding-text replacement in capable terminals.
+  * Avoid duplicated suffixes caused by forwarded Backspace ordering.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 12:00:00 +0700
+
+fcitx5-vietime (0.1.5-1~resolute1) resolute; urgency=medium
+
+  * Restore raw keystrokes for invalid Vietnamese syllables in Free Typing.
+  * Build for Ubuntu resolute.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 11:20:34 +0700
+
+fcitx5-vietime (0.1.4-1~resolute1) resolute; urgency=medium
+
+  * Adopt UniKey-style Telex restore and Backspace replay semantics in Rust.
+  * Preserve ươ transformations across flexible Telex key ordering.
+  * Build for Ubuntu resolute.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 11:15:25 +0700
+
+fcitx5-vietime (0.1.3-1~resolute1) resolute; urgency=medium
+
+  * Add forwarded-Backspace replacement fallback for terminal contexts.
+  * Build for Ubuntu resolute.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 11:10:47 +0700
+
+fcitx5-vietime (0.1.2-1~resolute1) resolute; urgency=medium
+
+  * Accept Telex letter modifiers typed after tones and codas.
+  * Add regression corpus based on real user typing order.
+  * Build for Ubuntu resolute.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 11:05:58 +0700
+
+fcitx5-vietime (0.1.1-1~resolute1) resolute; urgency=medium
+
+  * Fix modern tone placement and Telex suffix handling.
+  * Build for Ubuntu resolute.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 11:03:17 +0700
+
+fcitx5-vietime (0.1.0-1~resolute1) resolute; urgency=medium
+
+  * Initial release.
+  * Build for Ubuntu resolute.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Wed, 12 Aug 2026 10:48:53 +0700
