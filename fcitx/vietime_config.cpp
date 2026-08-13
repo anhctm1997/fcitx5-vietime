@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcitx-config/iniparser.h>
+#include <fcitx-utils/standardpath.h>
 
 namespace {
 

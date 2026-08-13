@@ -9,6 +9,7 @@
 #include <fcitx-utils/capabilityflags.h>
 #include <fcitx-utils/key.h>
 #include <fcitx-utils/dbus/matchrule.h>
+#include <fcitx-utils/standardpath.h>
 #include <algorithm>
 #include <string>
 
