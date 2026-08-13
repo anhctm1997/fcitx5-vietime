@@ -24,6 +24,7 @@ if [[ -n "$ref_name" && "$tag_version" != "$cargo_version" ]]; then
     exit 1
 fi
 
-dch --newversion "${cargo_version}-1~${codename}1" \
+dch --force-bad-version \
+    --newversion "${cargo_version}-1~${codename}1" \
     --distribution "$codename" \
     "Build for Ubuntu ${codename}."
