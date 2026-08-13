@@ -118,7 +118,7 @@ std::vector<std::string> vietimeExpandIdentities(
 
 std::vector<std::string> vietimeLoadApplicationPrograms() {
     fcitx::RawConfig raw;
-    fcitx::readAsIni(raw, fcitx::StandardPathsType::PkgConfig,
+    fcitx::readAsIni(raw, fcitx::StandardPath::Type::PkgConfig,
                      "conf/vietime-applications.conf");
     std::vector<std::string> rulesValues;
     const auto rules = raw.get("Rules");

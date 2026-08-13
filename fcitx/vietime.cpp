@@ -110,7 +110,7 @@ void FcitxVietimeEngine::queryFocusedApplicationSync() {
 
 void FcitxVietimeEngine::reloadConfig() {
     config_ = VietimeConfig();
-    fcitx::readAsIni(config_, fcitx::StandardPathsType::PkgConfig,
+    fcitx::readAsIni(config_, fcitx::StandardPath::Type::PkgConfig,
                      "conf/vietime.conf");
     config_.programs.setValue(vietimeNormalizePrograms(*config_.programs));
     applicationPrograms_ = vietimeLoadApplicationPrograms();
@@ -127,7 +127,7 @@ void FcitxVietimeEngine::setConfig(const fcitx::RawConfig &rawConfig) {
     next.programs.setValue(vietimeNormalizePrograms(*next.programs));
     flushAndRecreateContexts();
     config_ = std::move(next);
-    fcitx::safeSaveAsIni(config_, fcitx::StandardPathsType::PkgConfig,
+    fcitx::safeSaveAsIni(config_, fcitx::StandardPath::Type::PkgConfig,
                          "conf/vietime.conf");
 }
 
@@ -178,7 +178,7 @@ void FcitxVietimeEngine::writeStatus(fcitx::InputContext *context,
     status.setValueByPath("MatchedRule", matched.value_or(""));
     status.setValueByPath("Mode", deferred ? "preedit" : "direct");
     status.setValueByPath("Program", context->program());
-    fcitx::safeSaveAsIni(status, fcitx::StandardPathsType::Cache,
+    fcitx::safeSaveAsIni(status, fcitx::StandardPath::Type::Cache,
                          "vietime/status.conf");
 }
 
