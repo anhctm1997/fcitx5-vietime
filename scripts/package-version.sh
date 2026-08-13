@@ -18,10 +18,12 @@ if [[ -z "$cargo_version" || "$addon_version" != "$cargo_version" ]]; then
     exit 1
 fi
 ref_name="${GITHUB_REF_NAME:-}"
-tag_version="${ref_name#v}"
-if [[ -n "$ref_name" && "$tag_version" != "$cargo_version" ]]; then
-    echo "tag $ref_name does not match Cargo version $cargo_version" >&2
-    exit 1
+if [[ "${GITHUB_REF_TYPE:-}" == "tag" ]]; then
+    tag_version="${ref_name#v}"
+    if [[ "$tag_version" != "$cargo_version" ]]; then
+        echo "tag $ref_name does not match Cargo version $cargo_version" >&2
+        exit 1
+    fi
 fi
 
 dch --force-bad-version \
