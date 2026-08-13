@@ -1,3 +1,11 @@
+fcitx5-vietime (0.1.24-1~resolute1) resolute; urgency=medium
+
+  * Fix distro-specific package version generation for Noble and Resolute.
+  * Install the complete Debian build toolchain in CI and release jobs.
+  * Support the standard-path API provided by Fcitx 5.1.7 on Ubuntu Noble.
+
+ -- VietIME Contributors <anhcuongdev@gmail.com>  Thu, 13 Aug 2026 10:00:00 +0700
+
 fcitx5-vietime (0.1.23-1~resolute1) resolute; urgency=medium
 
   * Interpret a late w in non-qu ua nuclei as u horn (suawr becomes sửa).

@@ -369,9 +369,9 @@ Trước khi public repository:
 4. Commit thay đổi, tạo tag trùng phiên bản workspace và push:
 
    ```bash
-   git tag -a v0.1.23 -m "VietIME 0.1.23"
+   git tag -a v0.1.24 -m "VietIME 0.1.24"
    git push origin main
-   git push origin v0.1.23
+   git push origin v0.1.24
    ```
 
 Tag dạng `v*.*.*` kích hoạt `.github/workflows/release.yml`. Workflow build
